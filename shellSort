@@ -1,0 +1,38 @@
+#include <stdio.h>
+
+void print(int* a, int a_size) {
+    for (int i = 0; i < a_size; i++)
+        printf("%d ", a[i]);
+    printf("\n");
+}
+
+void shellInsertSort(int* a, int a_size, int dk) {
+    for (int i = dk; i < a_size; i++) {
+        if (a[i] < a[i-dk]) {
+            int j = i - dk;
+            int x = a[i];
+            a[i] = a[i-dk];
+            while (x < a[j]) {
+                a[j + dk] = a[j];
+                j = j - dk;
+            }
+            a[j+dk] = x;
+        }
+        print(a,a_size);
+    }
+}
+
+void shellSort (int* a, int a_size) {
+    int dk = a_size / 2;
+    while (dk >= 1){
+        shellInsertSort(a, a_size, dk);
+        dk /= 2;
+    }
+}
+
+int main() {
+    int a[8] = {3, 1, 5, 7 ,2, 4, 9, 6};
+    shellSort(a, 8);
+    print(a,8);
+    return 0;
+}
