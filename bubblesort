@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+void print(int* a, int a_size) {
+    for (int i = 0; i < a_size; i++)
+        printf("%d ", a[i]);
+    printf("\n");
+}
+
+void bubbleSort(int* a, int a_size) {
+    for (int i = 0; i < a_size; i++){
+        for (int j = 0; j < a_size-i-1; j++) {
+            if (a[j] > a[j+1]) {
+                int tmp = a[j];
+                a[j] = a[j+1];
+                a[j+1] = tmp;
+            }
+        }
+        print(a, 8);
+    }
+}
+
+int main() {
+    int a[8] = {3, 1, 5, 7 ,2, 4, 9, 6};
+//    InsertSort(a, 8);
+//    shellSort(a, 8);
+//    selectSort(a,8);
+//    selectSort2(a, 8);
+//    HeapSort(a, 8);
+    bubbleSort(a,8);
+    print(a,8);
+    return 0;
+}
