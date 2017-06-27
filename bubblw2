@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+void print(int* a, int a_size) {
+    for (int i = 0; i < a_size; i++)
+        printf("%d ", a[i]);
+    printf("\n");
+}
+
+void bubblesort2(int* a, int a_size) {
+    int low = 0;
+    int high = a_size - 1;
+    while (low < high) {
+        for (int j = low; j < high; j++) {
+            if (a[j] > a[j+1]){
+                int tmp = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = tmp;
+            }
+        }
+        --high;
+        for(int j = high; j > low; j--) {
+            if (a[j] < a[j-1]) {
+                int tmp = a[j-1];
+                a[j-1] = a[j];
+                a[j] = tmp;
+            }
+        }
+        low++;
+        print(a, a_size);
+    }
+}
+
+
+    int main() {
+        int a[8] = {3, 1, 5, 7, 2, 4, 9, 6};
+//    InsertSort(a, 8);
+//    shellSort(a, 8);
+//    selectSort(a,8);
+//    selectSort2(a, 8);
+//    HeapSort(a, 8);
+        bubblesort2(a, 8);
+        print(a, 8);
+        return 0;
+    }
