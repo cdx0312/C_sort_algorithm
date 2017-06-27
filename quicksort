@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+void print(int* a, int a_size) {
+    for (int i = 0; i < a_size; i++)
+        printf("%d ", a[i]);
+    printf("\n");
+}
+
+void swap (int* a, int* b) {
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+
+int partition(int* a, int low, int high) {
+    int key = a[low];
+    while(low<high) {
+        while (low < high && a[high] >= key)
+            high--;
+        swap(a+low, a+high);
+        while (low < high && a[low] <= key)
+            low++;
+        swap(a + low, a + high);
+    }
+    print(a, 8);
+    return low;
+}
+
+void quicksort(int* a, int low, int high){
+    if (low < high) {
+        int key = partition(a, low, high);
+        quicksort(a, low, key-1);
+        quicksort(a, key+1, high);
+    }
+}
+    int main() {
+        int a[8] = {3, 1, 5, 7, 2, 4, 9, 6};
+//    InsertSort(a, 8);
+//    shellSort(a, 8);
+//    selectSort(a,8);
+//    selectSort2(a, 8);
+//    HeapSort(a, 8);
+//    bubblesort2(a, 8);
+        quicksort(a, 0, 7);
+        print(a, 8);
+        return 0;
+    }
