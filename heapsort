@@ -1,0 +1,56 @@
+#include <stdio.h>
+
+void print(int* a, int a_size) {
+    for (int i = 0; i < a_size; i++)
+        printf("%d ", a[i]);
+    printf("\n");
+}
+
+/*
+ * @param a是待调整的堆数组
+ * @param s是待调整的数组元素的位置
+ * @param a_size是数组长度
+ */
+void HeapAdjust (int* a, int a_size, int s) {
+    int tmp = a[s];
+    int child = 2 * s + 1;
+    while (child < a_size) {
+        if (child + 1 < a_size && a[child]<a[child+1])
+            child++;
+        if (a[s] < a[child]) {
+            a[s] = a[child];
+            s = child;
+            child = 2 * s + 1;
+        } else
+            break;
+        a[s] = tmp;
+    }
+    print(a, a_size);
+
+}
+
+void buildHeap (int* a, int a_size) {
+    for (int i = (a_size - 1) / 2; i >= 0; i--)
+        HeapAdjust(a,i,a_size);
+}
+
+void HeapSort (int* a, int a_size) {
+    buildHeap(a, a_size);
+    for (int i = a_size-1; i>0; i--){
+        int tmp = a[i];
+        a[i] = a[0];
+        a[0] = tmp;
+        HeapAdjust(a, i, 0);
+    }
+}
+
+int main() {
+    int a[8] = {3, 1, 5, 7 ,2, 4, 9, 6};
+//    InsertSort(a, 8);
+//    shellSort(a, 8);
+//    selectSort(a,8);
+//    selectSort2(a, 8);
+    HeapSort(a, 8);
+    print(a,8);
+    return 0;
+}
