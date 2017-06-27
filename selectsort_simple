@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+void print(int* a, int a_size) {
+    for (int i = 0; i < a_size; i++)
+        printf("%d ", a[i]);
+    printf("\n");
+}
+
+int selectMinKey(int* a, int a_size, int i) {
+    int k = i;
+    for (int j = i + 1; j < a_size; j++) {
+        if (a[k] > a[j])
+            k = j;
+    }
+    return k;
+}
+
+void selectSort(int* a, int a_size) {
+    for (int i = 0; i < a_size; i++) {
+        int index = selectMinKey(a, a_size,i);
+        if (index != i){
+            int temp = a[i];
+            a[i] = a[index];
+            a[index] = temp;
+        }
+        print(a,a_size);
+    }
+}
+
+int main() {
+    int a[8] = {3, 1, 5, 7 ,2, 4, 9, 6};
+//    InsertSort(a, 8);
+//    shellSort(a, 8);
+    selectSort(a,8);
+    print(a,8);
+    return 0;
+}
